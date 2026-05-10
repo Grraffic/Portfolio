@@ -1,6 +1,43 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import {
+  SiHtml5, SiCss, SiJavascript, SiReact, SiTypescript,
+  SiNodedotjs, SiExpress, SiSupabase, SiTailwindcss,
+  SiPostgresql, SiGit, SiVite, SiMongodb, SiFigma, SiPython
+} from 'react-icons/si';
+import { FaJava } from 'react-icons/fa';
+import type { IconType } from 'react-icons';
+
+interface Skill {
+  name: string;
+  Icon: IconType;
+  iconColor: string;
+  glowColor: string;
+  bgHover: string;
+}
+
+const gridSkills: Skill[] = [
+  { name: 'HTML', Icon: SiHtml5, iconColor: 'text-orange-400', glowColor: 'rgba(249,115,22,0.5)', bgHover: '' },
+  { name: 'CSS', Icon: SiCss, iconColor: 'text-blue-400', glowColor: 'rgba(96,165,250,0.5)', bgHover: '' },
+  { name: 'JavaScript', Icon: SiJavascript, iconColor: 'text-yellow-400', glowColor: 'rgba(250,204,21,0.5)', bgHover: '' },
+  { name: 'React', Icon: SiReact, iconColor: 'text-cyan-400', glowColor: 'rgba(34,211,238,0.5)', bgHover: '' },
+  { name: 'TypeScript', Icon: SiTypescript, iconColor: 'text-blue-500', glowColor: 'rgba(59,130,246,0.5)', bgHover: '' },
+  { name: 'Node.js', Icon: SiNodedotjs, iconColor: 'text-green-400', glowColor: 'rgba(74,222,128,0.5)', bgHover: '' },
+  { name: 'Express', Icon: SiExpress, iconColor: 'text-slate-300', glowColor: 'rgba(203,213,225,0.3)', bgHover: '' },
+  { name: 'Supabase', Icon: SiSupabase, iconColor: 'text-emerald-400', glowColor: 'rgba(52,211,153,0.5)', bgHover: '' },
+  { name: 'Tailwind', Icon: SiTailwindcss, iconColor: 'text-teal-400', glowColor: 'rgba(45,212,191,0.5)', bgHover: '' },
+  { name: 'PostgreSQL', Icon: SiPostgresql, iconColor: 'text-indigo-400', glowColor: 'rgba(129,140,248,0.5)', bgHover: '' },
+  { name: 'Git', Icon: SiGit, iconColor: 'text-red-400', glowColor: 'rgba(248,113,113,0.5)', bgHover: '' },
+  { name: 'Vite', Icon: SiVite, iconColor: 'text-purple-400', glowColor: 'rgba(192,132,252,0.5)', bgHover: '' },
+  { name: 'MongoDB', Icon: SiMongodb, iconColor: 'text-green-500', glowColor: 'rgba(34,197,94,0.5)', bgHover: '' },
+  { name: 'Figma', Icon: SiFigma, iconColor: 'text-pink-400', glowColor: 'rgba(244,114,182,0.5)', bgHover: '' },
+  { name: 'Python', Icon: SiPython, iconColor: 'text-blue-500', glowColor: 'rgba(59,130,246,0.5)', bgHover: '' },
+  { name: 'Java', Icon: FaJava, iconColor: 'text-orange-500', glowColor: 'rgba(249,115,22,0.5)', bgHover: '' },
+];
 
 const Home = () => {
+  const [hoveredSkill, setHoveredSkill] = useState<Skill | null>(null);
+
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-navy-900 transition-colors duration-200">
       {/* Hero Section */}
@@ -38,6 +75,7 @@ const Home = () => {
             <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg leading-relaxed max-w-xl mx-auto md:mx-0 mb-10 transition-colors duration-200">
               I build clean, responsive web applications with modern technologies.
               Passionate about creating great user experiences and writing maintainable code.
+              I leverage AI tools to accelerate development, while carefully reviewing and refining the code to ensure high quality.
             </p>
 
             {/* CTA Buttons */}
@@ -87,33 +125,29 @@ const Home = () => {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600 animate-bounce">
-          <span className="text-xs">Scroll</span>
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </div>
+
       </section>
 
       {/* About Section */}
-      <section className="py-24 px-4 bg-slate-100/50 dark:bg-navy-800/50 transition-colors duration-200">
+      <section className="py-24 px-4 bg-slate-900 dark:bg-[#0d1424] transition-colors duration-200">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
             {/* Left: Text */}
             <div>
-              <p className="text-violet-600 dark:text-violet-400 text-sm font-semibold uppercase tracking-widest mb-4 transition-colors duration-200">About Me</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-6 transition-colors duration-200">
+              <p className="text-teal-400 text-sm font-semibold uppercase tracking-widest mb-4">About Me</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
                 Building things for the web
               </h2>
-              <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed mb-4 transition-colors duration-200">
+              <p className="text-slate-400 text-base leading-relaxed mb-4">
                 I'm a developer who loves turning ideas into real products. I work across the full stack — from designing responsive UIs to building APIs and managing databases.
               </p>
-              <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed mb-8 transition-colors duration-200">
+              <p className="text-slate-400 text-base leading-relaxed mb-8">
                 Currently focused on building web applications using React, TypeScript, Node.js, and Supabase.
               </p>
               <Link
                 to="/projects"
-                className="inline-flex items-center gap-2 text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 font-medium transition-colors duration-200 group"
+                className="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 font-medium transition-colors duration-200 group"
               >
                 See my work
                 <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,29 +156,38 @@ const Home = () => {
               </Link>
             </div>
 
-            {/* Right: Skills/Tech */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {[
-                { name: 'React', icon: '⚛️' },
-                { name: 'TypeScript', icon: '🔷' },
-                { name: 'Node.js', icon: '🟢' },
-                { name: 'Express', icon: '🚂' },
-                { name: 'Supabase', icon: '⚡' },
-                { name: 'Tailwind CSS', icon: '🎨' },
-                { name: 'PostgreSQL', icon: '🐘' },
-                { name: 'Git', icon: '🌿' },
-                { name: 'Vite', icon: '⚡' },
-              ].map((skill) => (
+            {/* Right: Glassmorphism Grid with ghost icon behind on hover */}
+            <div className="relative grid grid-cols-4 gap-3">
+
+              {/* Ghost watermark icon — centered behind all cards on hover */}
+              {hoveredSkill && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+                  <hoveredSkill.Icon
+                    className={`text-[30rem] opacity-10 transition-all duration-500 ${hoveredSkill.iconColor}`}
+                    style={{ filter: `drop-shadow(0 0 60px ${hoveredSkill.glowColor})` }}
+                  />
+                </div>
+              )}
+
+              {gridSkills.map((skill) => (
                 <div
                   key={skill.name}
-                  className="flex items-center gap-3 bg-white dark:bg-navy-800 border border-slate-200 dark:border-navy-700 rounded-xl px-4 py-3 hover:border-violet-500/40 hover:bg-slate-50 dark:hover:bg-navy-700 transition-all duration-200 group cursor-default shadow-sm dark:shadow-none"
+                  onMouseEnter={() => setHoveredSkill(skill)}
+                  onMouseLeave={() => setHoveredSkill(null)}
+                  style={{ ['--glow' as string]: skill.glowColor } as React.CSSProperties}
+                  className="relative z-10 group flex flex-col items-center justify-center gap-2 aspect-square rounded-2xl cursor-default
+                    bg-white/5 backdrop-blur-sm border border-white/10
+                    transition-all duration-300 ease-out
+                    hover:scale-105 hover:border-white/25 hover:bg-white/10
+                    hover:[box-shadow:0_0_22px_4px_var(--glow)]"
                 >
-                  <span className="text-xl">{skill.icon}</span>
-                  <span className="text-slate-600 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white text-sm font-medium transition-colors duration-200">{skill.name}</span>
+                  <skill.Icon className={`text-2xl transition-transform duration-300 group-hover:scale-110 ${skill.iconColor}`} />
+                  <span className="text-slate-400 group-hover:text-white text-[10px] font-medium text-center leading-tight transition-colors duration-300">{skill.name}</span>
                 </div>
               ))}
             </div>
           </div>
+
         </div>
       </section>
     </main>

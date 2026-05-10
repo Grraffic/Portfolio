@@ -1,6 +1,7 @@
 import useProjects from '../hooks/useProjects';
 import useProjectFilter from '../hooks/useProjectFilter';
 import ProjectCard from '../components/ProjectCard';
+import ProjectCardSkeleton from '../components/ProjectCardSkeleton';
 
 const Projects = () => {
   const { projects, loading, error } = useProjects();
@@ -49,16 +50,12 @@ const Projects = () => {
           </div>
         )}
 
-        {/* Loading */}
+        {/* Loading Skeletons */}
         {loading && (
-          <div className="flex items-center justify-center py-24">
-            <div className="flex flex-col items-center gap-4">
-              <svg className="w-10 h-10 text-violet-500 animate-spin" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-              </svg>
-              <p className="text-slate-500 dark:text-slate-400 text-sm transition-colors duration-200">Loading projects…</p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-pulse">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <ProjectCardSkeleton key={i} />
+            ))}
           </div>
         )}
 
