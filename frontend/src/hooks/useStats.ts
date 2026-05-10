@@ -33,6 +33,11 @@ export const useStats = () => {
 
   useEffect(() => {
     fetchStats();
+
+    // Enable live updates by polling every 10 seconds
+    const interval = setInterval(fetchStats, 10000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   return { stats, loading, fetchStats, incrementViews };
