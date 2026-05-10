@@ -70,7 +70,7 @@ const Experience = () => {
   const [hoveredSkill, setHoveredSkill] = useState<Skill | null>(null);
 
   return (
-    <section className="py-14 sm:py-20 lg:py-24 px-4 bg-slate-100 dark:bg-[#0d1424] transition-colors duration-200">
+    <section className="py-14 sm:py-20 lg:py-24 px-4 bg-slate-100 dark:bg-[#0d1424] transition-colors duration-200 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col gap-16 sm:gap-20 lg:gap-24 items-center md:items-start w-full">
 
@@ -111,7 +111,7 @@ const Experience = () => {
               Tools I Use
             </h2>
 
-            <div className="relative flex flex-wrap gap-2 sm:gap-3 md:gap-4 w-full">
+            <div className="relative flex flex-wrap gap-2 sm:gap-3 md:gap-4 w-full justify-center">
 
               {/* Ghost watermark icon — centered behind all cards on hover */}
               {hoveredSkill && (
