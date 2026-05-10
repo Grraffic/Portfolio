@@ -17,6 +17,18 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Welcome to the Portfolio API',
+    endpoints: {
+      health: '/health',
+      projects: '/api/projects',
+      stats: '/api/stats'
+    }
+  });
+});
+
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', message: 'Portfolio API is running' });
