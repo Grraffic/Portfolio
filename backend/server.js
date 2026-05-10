@@ -19,7 +19,7 @@ app.use(express.json());
 
 // Root route
 app.get('/', (req, res) => {
-  res.json({ 
+  res.json({
     message: 'Welcome to the Portfolio API',
     endpoints: {
       health: '/health',
