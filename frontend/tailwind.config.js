@@ -38,6 +38,13 @@ export default {
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
+      screens: {
+        'mobile-s': '320px',
+        'mobile-m': '375px',
+        'mobile-l': '425px',
+        'tablet': '768px',
+        'laptop': '1024px',
+      },
     },
   },
   plugins: [],

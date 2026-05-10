@@ -129,15 +129,21 @@ const Experience = () => {
                   onMouseEnter={() => setHoveredSkill(skill)}
                   onMouseLeave={() => setHoveredSkill(null)}
                   style={{ ['--glow' as string]: skill.glowColor } as React.CSSProperties}
-                  className="relative z-10 group flex flex-col items-center justify-center gap-2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-2xl cursor-default
+                  className="relative z-10 group flex flex-col items-center justify-center gap-2 
+                    w-[90px] h-[90px] 
+                    mobile-m:w-[105px] mobile-m:h-[105px] 
+                    mobile-l:w-[115px] mobile-l:h-[115px] 
+                    tablet:w-[125px] tablet:h-[125px] 
+                    laptop:w-[140px] laptop:h-[140px] 
+                    rounded-2xl cursor-default
                     bg-white dark:bg-white/5 backdrop-blur-sm border border-slate-200 dark:border-white/10
                     shadow-sm dark:shadow-none
                     transition-all duration-300 ease-out
                     hover:scale-105 hover:border-slate-300 dark:hover:border-white/25 hover:bg-slate-50 dark:hover:bg-white/10
                     hover:[box-shadow:0_0_22px_4px_var(--glow)]"
                 >
-                  <skill.Icon className={`text-2xl sm:text-3xl transition-transform duration-300 group-hover:scale-110 ${skill.iconColor}`} />
-                  <span className="text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white text-xs font-medium text-center leading-tight transition-colors duration-300">{skill.name}</span>
+                  <skill.Icon className={`text-3xl mobile-m:text-4xl tablet:text-5xl transition-transform duration-300 group-hover:scale-110 ${skill.iconColor}`} />
+                  <span className="text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white text-[10px] mobile-m:text-xs font-medium text-center leading-tight transition-colors duration-300">{skill.name}</span>
                 </div>
               ))}
             </div>
