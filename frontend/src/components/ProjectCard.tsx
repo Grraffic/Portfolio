@@ -4,23 +4,27 @@ import TechBadge from './TechBadge';
 
 interface ProjectCardProps {
   project: Project;
-  onEdit: (project: Project) => void;
-  onDelete: (id: string) => void;
+  onEdit?: (project: Project) => void;
+  onDelete?: (id: string) => void;
+  onClick?: (project: Project) => void;
   showActions?: boolean;
 }
 
-const ProjectCard = ({ project, onEdit, onDelete, showActions = false }: ProjectCardProps) => {
+const ProjectCard = ({ project, onEdit, onDelete, onClick, showActions = false }: ProjectCardProps) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
-    if (window.confirm(`Are you sure you want to delete "${project.title}"?`)) {
+    if (onDelete && window.confirm(`Are you sure you want to delete "${project.title}"?`)) {
       setIsDeleting(true);
       onDelete(project.id);
     }
   };
 
   return (
-    <div className="group bg-white dark:bg-navy-800 border border-slate-200 dark:border-navy-700 rounded-2xl overflow-hidden hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/10 hover:-translate-y-1 animate-fade-in">
+    <div 
+      onClick={() => onClick && onClick(project)}
+      className={`group bg-white dark:bg-navy-800 border border-slate-200 dark:border-navy-700 rounded-2xl overflow-hidden hover:border-violet-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/10 hover:-translate-y-1 animate-fade-in ${onClick ? 'cursor-pointer' : ''}`}
+    >
       {/* Project Image */}
       <div className="relative h-48 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-navy-700 dark:to-navy-900 overflow-hidden transition-colors duration-200">
         {project.image_url ? (
@@ -74,6 +78,7 @@ const ProjectCard = ({ project, onEdit, onDelete, showActions = false }: Project
                 target="_blank"
                 rel="noopener noreferrer"
                 id={`github-link-${project.id}`}
+                onClick={(e) => e.stopPropagation()}
                 className="flex items-center gap-1.5 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white text-xs font-medium transition-colors duration-200 group/link"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -88,6 +93,7 @@ const ProjectCard = ({ project, onEdit, onDelete, showActions = false }: Project
                 target="_blank"
                 rel="noopener noreferrer"
                 id={`live-link-${project.id}`}
+                onClick={(e) => e.stopPropagation()}
                 className="flex items-center gap-1.5 text-violet-600 hover:text-violet-500 dark:text-violet-400 dark:hover:text-violet-300 text-xs font-medium transition-colors duration-200"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -103,7 +109,10 @@ const ProjectCard = ({ project, onEdit, onDelete, showActions = false }: Project
             <div className="flex items-center gap-2">
               <button
                 id={`edit-btn-${project.id}`}
-                onClick={() => onEdit(project)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onEdit && onEdit(project);
+                }}
                 className="p-1.5 text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-500/10 rounded-lg transition-all duration-200"
                 title="Edit project"
               >
@@ -113,7 +122,10 @@ const ProjectCard = ({ project, onEdit, onDelete, showActions = false }: Project
               </button>
               <button
                 id={`delete-btn-${project.id}`}
-                onClick={handleDelete}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDelete();
+                }}
                 disabled={isDeleting}
                 className="p-1.5 text-slate-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg transition-all duration-200 disabled:opacity-50"
                 title="Delete project"

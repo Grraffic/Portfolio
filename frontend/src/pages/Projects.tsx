@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import useProjects from '../hooks/useProjects';
 import useProjectFilter from '../hooks/useProjectFilter';
 import ProjectCard from '../components/ProjectCard';
 import ProjectCardSkeleton from '../components/ProjectCardSkeleton';
+import ProjectModal from '../components/ProjectModal';
+import type { Project } from '../types/project';
 
 const Projects = () => {
   const { projects, loading, error } = useProjects();
   const { activeFilter, allTechs, filteredProjects, toggleFilter, clearFilter } = useProjectFilter(projects);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-navy-900 pt-24 pb-20 transition-colors duration-200">
@@ -90,14 +94,14 @@ const Projects = () => {
               <ProjectCard
                 key={project.id}
                 project={project}
-                onEdit={() => {}}
-                onDelete={() => {}}
+                onClick={setSelectedProject}
                 showActions={false}
               />
             ))}
           </div>
         )}
       </div>
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
     </main>
   );
 };

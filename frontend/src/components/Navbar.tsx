@@ -20,9 +20,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 bg-violet-600 rounded-lg flex items-center justify-center text-white font-bold text-sm group-hover:bg-violet-500 transition-colors duration-200">
-              RR
-            </div>
+            <img 
+              src="/grraffic_logo.png" 
+              alt="Grraffic Logo" 
+              className="w-8 h-8 rounded-lg object-cover transition-transform duration-200 group-hover:scale-105" 
+            />
             <span className="text-slate-900 dark:text-white font-semibold text-lg hidden sm:block transition-colors duration-200">
               Grraffic
             </span>

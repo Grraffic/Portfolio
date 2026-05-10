@@ -1,42 +1,17 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  SiHtml5, SiCss, SiJavascript, SiReact, SiTypescript,
-  SiNodedotjs, SiExpress, SiSupabase, SiTailwindcss,
-  SiPostgresql, SiGit, SiVite, SiMongodb, SiFigma, SiPython
-} from 'react-icons/si';
-import { FaJava } from 'react-icons/fa';
-import type { IconType } from 'react-icons';
-
-interface Skill {
-  name: string;
-  Icon: IconType;
-  iconColor: string;
-  glowColor: string;
-  bgHover: string;
-}
-
-const gridSkills: Skill[] = [
-  { name: 'HTML', Icon: SiHtml5, iconColor: 'text-orange-400', glowColor: 'rgba(249,115,22,0.5)', bgHover: '' },
-  { name: 'CSS', Icon: SiCss, iconColor: 'text-blue-400', glowColor: 'rgba(96,165,250,0.5)', bgHover: '' },
-  { name: 'JavaScript', Icon: SiJavascript, iconColor: 'text-yellow-400', glowColor: 'rgba(250,204,21,0.5)', bgHover: '' },
-  { name: 'React', Icon: SiReact, iconColor: 'text-cyan-400', glowColor: 'rgba(34,211,238,0.5)', bgHover: '' },
-  { name: 'TypeScript', Icon: SiTypescript, iconColor: 'text-blue-500', glowColor: 'rgba(59,130,246,0.5)', bgHover: '' },
-  { name: 'Node.js', Icon: SiNodedotjs, iconColor: 'text-green-400', glowColor: 'rgba(74,222,128,0.5)', bgHover: '' },
-  { name: 'Express', Icon: SiExpress, iconColor: 'text-slate-300', glowColor: 'rgba(203,213,225,0.3)', bgHover: '' },
-  { name: 'Supabase', Icon: SiSupabase, iconColor: 'text-emerald-400', glowColor: 'rgba(52,211,153,0.5)', bgHover: '' },
-  { name: 'Tailwind', Icon: SiTailwindcss, iconColor: 'text-teal-400', glowColor: 'rgba(45,212,191,0.5)', bgHover: '' },
-  { name: 'PostgreSQL', Icon: SiPostgresql, iconColor: 'text-indigo-400', glowColor: 'rgba(129,140,248,0.5)', bgHover: '' },
-  { name: 'Git', Icon: SiGit, iconColor: 'text-red-400', glowColor: 'rgba(248,113,113,0.5)', bgHover: '' },
-  { name: 'Vite', Icon: SiVite, iconColor: 'text-purple-400', glowColor: 'rgba(192,132,252,0.5)', bgHover: '' },
-  { name: 'MongoDB', Icon: SiMongodb, iconColor: 'text-green-500', glowColor: 'rgba(34,197,94,0.5)', bgHover: '' },
-  { name: 'Figma', Icon: SiFigma, iconColor: 'text-pink-400', glowColor: 'rgba(244,114,182,0.5)', bgHover: '' },
-  { name: 'Python', Icon: SiPython, iconColor: 'text-blue-500', glowColor: 'rgba(59,130,246,0.5)', bgHover: '' },
-  { name: 'Java', Icon: FaJava, iconColor: 'text-orange-500', glowColor: 'rgba(249,115,22,0.5)', bgHover: '' },
-];
+import { motion } from 'framer-motion';
+import useProjects from '../hooks/useProjects';
+import ProjectCard from '../components/ProjectCard';
+import ProjectModal from '../components/ProjectModal';
+import TextDecrypt from '../components/TextDecrypt';
+import type { Project } from '../types/project';
+import Experience from '../components/Experience';
 
 const Home = () => {
-  const [hoveredSkill, setHoveredSkill] = useState<Skill | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const { projects, loading } = useProjects();
+  const featuredProjects = projects.slice(0, 3);
 
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-navy-900 transition-colors duration-200">
@@ -46,7 +21,12 @@ const Home = () => {
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none" style={{ animationDelay: '1.5s' }} />
 
-        <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 max-w-5xl mx-auto animate-fade-in">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative flex flex-col md:flex-row items-center justify-center gap-12 max-w-5xl mx-auto"
+        >
           {/* Profile Image */}
           <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 shrink-0 rounded-full overflow-hidden border-4 border-white dark:border-navy-800 shadow-xl dark:shadow-none">
             <img
@@ -61,9 +41,10 @@ const Home = () => {
             {/* Name */}
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight transition-colors duration-200">
               Hi, I'm{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-violet-700 dark:from-violet-400 dark:to-violet-600 transition-colors duration-200">
-                Rafael Ramos
-              </span>
+              <TextDecrypt
+                text="Rafael Ramos"
+                className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-violet-700 dark:from-violet-400 dark:to-violet-600 transition-colors duration-200"
+              />
             </h1>
 
             {/* Title */}
@@ -83,16 +64,17 @@ const Home = () => {
               <Link
                 id="view-projects-btn"
                 to="/projects"
-                className="w-full sm:w-auto px-8 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-0.5"
+                className="w-full sm:w-auto px-8 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-0.5 text-center"
               >
                 View My Projects
               </Link>
               <a
-                id="contact-btn"
-                href="mailto:your@email.com"
-                className="w-full sm:w-auto px-8 py-3.5 bg-white dark:bg-navy-800 hover:bg-slate-50 dark:hover:bg-navy-700 text-slate-900 dark:text-white font-semibold rounded-xl border border-slate-200 dark:border-navy-700 hover:border-violet-500/50 transition-all duration-200"
+                id="download-resume-btn"
+                href="/Rafael%20Ramos.pdf"
+                download="Rafael_Ramos_Resume.pdf"
+                className="w-full sm:w-auto px-8 py-3.5 bg-white dark:bg-navy-800 hover:bg-slate-50 dark:hover:bg-navy-700 text-slate-900 dark:text-white font-semibold rounded-xl border border-slate-200 dark:border-navy-700 hover:border-violet-500/50 transition-all duration-200 text-center"
               >
-                Contact Me
+                Download CV
               </a>
             </div>
 
@@ -110,86 +92,111 @@ const Home = () => {
                 </svg>
               </a>
               <a
-                href="https://linkedin.com/in/your-profile"
+                href="https://www.facebook.com/xdraf56"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors duration-200"
-                aria-label="LinkedIn"
+                aria-label="Facebook"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                 </svg>
               </a>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Scroll indicator */}
 
       </section>
 
-      {/* About Section */}
-      <section className="py-24 px-4 bg-slate-900 dark:bg-[#0d1424] transition-colors duration-200">
+      {/* Experience & Tools Section */}
+      <Experience />
+
+      {/* Featured Projects Section */}
+      <section className="py-24 px-4 bg-slate-50 dark:bg-navy-900 transition-colors duration-200">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col items-center text-center mb-16"
+          >
+            <p className="text-violet-600 dark:text-violet-400 text-sm font-semibold uppercase tracking-widest mb-4">Portfolio</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-6">Featured Projects</h2>
+            <p className="text-slate-600 dark:text-slate-400 max-w-2xl">
+              A quick look at some of my recent work. View all projects to see my full portfolio.
+            </p>
+          </motion.div>
 
-            {/* Left: Text */}
-            <div>
-              <p className="text-teal-400 text-sm font-semibold uppercase tracking-widest mb-4">About Me</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-                Building things for the web
-              </h2>
-              <p className="text-slate-400 text-base leading-relaxed mb-4">
-                I'm a developer who loves turning ideas into real products. I work across the full stack — from designing responsive UIs to building APIs and managing databases.
-              </p>
-              <p className="text-slate-400 text-base leading-relaxed mb-8">
-                Currently focused on building web applications using React, TypeScript, Node.js, and Supabase.
-              </p>
-              <Link
-                to="/projects"
-                className="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 font-medium transition-colors duration-200 group"
-              >
-                See my work
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
-
-            {/* Right: Glassmorphism Grid with ghost icon behind on hover */}
-            <div className="relative grid grid-cols-4 gap-3">
-
-              {/* Ghost watermark icon — centered behind all cards on hover */}
-              {hoveredSkill && (
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-                  <hoveredSkill.Icon
-                    className={`text-[30rem] opacity-10 transition-all duration-500 ${hoveredSkill.iconColor}`}
-                    style={{ filter: `drop-shadow(0 0 60px ${hoveredSkill.glowColor})` }}
-                  />
-                </div>
-              )}
-
-              {gridSkills.map((skill) => (
-                <div
-                  key={skill.name}
-                  onMouseEnter={() => setHoveredSkill(skill)}
-                  onMouseLeave={() => setHoveredSkill(null)}
-                  style={{ ['--glow' as string]: skill.glowColor } as React.CSSProperties}
-                  className="relative z-10 group flex flex-col items-center justify-center gap-2 aspect-square rounded-2xl cursor-default
-                    bg-white/5 backdrop-blur-sm border border-white/10
-                    transition-all duration-300 ease-out
-                    hover:scale-105 hover:border-white/25 hover:bg-white/10
-                    hover:[box-shadow:0_0_22px_4px_var(--glow)]"
-                >
-                  <skill.Icon className={`text-2xl transition-transform duration-300 group-hover:scale-110 ${skill.iconColor}`} />
-                  <span className="text-slate-400 group-hover:text-white text-[10px] font-medium text-center leading-tight transition-colors duration-300">{skill.name}</span>
-                </div>
+          {loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="h-80 bg-slate-200 dark:bg-navy-800 rounded-2xl animate-pulse"></div>
               ))}
             </div>
-          </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {featuredProjects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <ProjectCard project={project} onClick={setSelectedProject} />
+                </motion.div>
+              ))}
+            </div>
+          )}
 
+          <div className="mt-16 flex justify-center">
+            <Link
+              to="/projects"
+              className="px-8 py-3 bg-white dark:bg-navy-800 hover:bg-slate-50 dark:hover:bg-navy-700 text-slate-900 dark:text-white font-semibold rounded-xl border border-slate-200 dark:border-navy-700 hover:border-violet-500/50 transition-all duration-200"
+            >
+              View All Projects
+            </Link>
+          </div>
         </div>
       </section>
+
+      {/* Let's Work Together Section */}
+      <section className="py-32 px-4 bg-slate-900 dark:bg-[#0a0f1c] text-center transition-colors duration-200">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="max-w-3xl mx-auto"
+        >
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-8">
+            Let's work together
+          </h2>
+          <p className="text-slate-400 text-lg mb-12 max-w-xl mx-auto">
+            I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+          </p>
+          <a
+            href="mailto:your@email.com"
+            className="inline-block px-10 py-4 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-1"
+          >
+            Say Hello
+          </a>
+
+          <div className="flex items-center justify-center gap-8 mt-20">
+            <a href="https://github.com/Grraffic" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-colors">
+              GitHub
+            </a>
+            <a href="https://www.facebook.com/xdraf56" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-colors">
+              Facebook
+            </a>
+          </div>
+        </motion.div>
+      </section>
+
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
     </main>
   );
 };

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import MouseGlow from './components/MouseGlow';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Admin from './pages/Admin';
@@ -12,6 +12,7 @@ function App() {
     <ThemeProvider>
       <BrowserRouter>
         <div className="min-h-screen bg-slate-50 dark:bg-navy-900 flex flex-col transition-colors duration-200">
+          <MouseGlow />
           <Navbar />
           <div className="flex-1">
             <Routes>
@@ -20,7 +21,6 @@ function App() {
               <Route path="/admin" element={<Admin />} />
             </Routes>
           </div>
-          <Footer />
         </div>
       </BrowserRouter>
     </ThemeProvider>
