@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-navy-900 transition-colors duration-200 overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-16 sm:pt-0">
         {/* Animated background orbs */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none" style={{ animationDelay: '1.5s' }} />
