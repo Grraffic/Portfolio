@@ -10,23 +10,30 @@ const PORT = process.env.PORT || 5001;
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174'],
+  origin: '*', // Allow all origins for Vercel deployment, or specify your frontend Vercel URL later
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.json());
 
 // Health check
-app.get('/health', (req, res) => {
+app.get(['/health', '/_/backend/health'], (req, res) => {
   res.json({ status: 'OK', message: 'Portfolio API is running' });
 });
 
 // Routes
+// Also accept /_/backend/api/projects for Vercel experimentalServices routing
 app.use('/api/projects', projectRoutes);
+app.use('/_/backend/api/projects', projectRoutes);
 
 // Error handler (must be last)
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+  });
+}
+
+// Export for Vercel serverless functions
+module.exports = app;

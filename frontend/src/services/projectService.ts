@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { Project, ProjectFormData } from '../types/project';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/_/backend/api' : 'http://localhost:5001/api');
 
 const api = axios.create({
   baseURL: API_BASE,
