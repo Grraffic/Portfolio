@@ -3,7 +3,7 @@ import useProjects from '../hooks/useProjects';
 import useProjectModal from '../hooks/useProjectModal';
 import useToast from '../hooks/useToast';
 import ProjectCard from '../components/ProjectCard';
-import ProjectModal from '../components/ProjectModal';
+import ProjectFormModal from '../components/ProjectFormModal';
 
 const Admin = () => {
   const { projects, loading, error, createProject, updateProject, deleteProject } = useProjects();
@@ -105,8 +105,8 @@ const Admin = () => {
         )}
       </div>
 
-      {/* Modal */}
-      <ProjectModal
+      {/* Form Modal */}
+      <ProjectFormModal
         isOpen={modal.isOpen}
         onClose={modal.close}
         onSubmit={handleSubmit}
