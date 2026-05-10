@@ -12,12 +12,12 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <main className="min-h-screen bg-slate-50 dark:bg-navy-900 pt-24 pb-20 transition-colors duration-200">
+    <main className="min-h-screen bg-slate-50 dark:bg-navy-900 pt-20 sm:pt-24 pb-16 sm:pb-20 transition-colors duration-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12 animate-fade-in">
+        <div className="text-center mb-8 sm:mb-12 animate-fade-in">
           <p className="text-violet-600 dark:text-violet-400 text-sm font-semibold uppercase tracking-widest mb-3 transition-colors duration-200">Portfolio</p>
-          <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4 transition-colors duration-200">My Projects</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4 transition-colors duration-200">My Projects</h1>
           <p className="text-slate-600 dark:text-slate-400 text-base max-w-xl mx-auto transition-colors duration-200">
             A collection of things I've built — from web apps to APIs.
           </p>
@@ -25,11 +25,11 @@ const Projects = () => {
 
         {/* Tech Filter */}
         {allTechs.length > 0 && (
-          <div className="flex flex-wrap gap-2 justify-center mb-10 animate-slide-up">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center mb-8 sm:mb-10 animate-slide-up">
             <button
               id="filter-all"
               onClick={clearFilter}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 ${
+              className={`px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium border transition-all duration-200 ${
                 !activeFilter
                   ? 'bg-violet-600 border-violet-600 text-white shadow-sm'
                   : 'bg-transparent border-slate-200 dark:border-navy-700 text-slate-600 dark:text-slate-400 hover:border-violet-500/50 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-transparent'
@@ -42,7 +42,7 @@ const Projects = () => {
                 key={tech}
                 id={`filter-${tech.toLowerCase()}`}
                 onClick={() => toggleFilter(tech)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 ${
+                className={`px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium border transition-all duration-200 ${
                   activeFilter === tech
                     ? 'bg-violet-600 border-violet-600 text-white shadow-sm'
                     : 'bg-transparent border-slate-200 dark:border-navy-700 text-slate-600 dark:text-slate-400 hover:border-violet-500/50 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-transparent'
@@ -56,7 +56,7 @@ const Projects = () => {
 
         {/* Loading Skeletons */}
         {loading && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-pulse">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 animate-pulse">
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <ProjectCardSkeleton key={i} />
             ))}
@@ -89,7 +89,7 @@ const Projects = () => {
 
         {/* Grid */}
         {!loading && !error && filteredProjects.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {filteredProjects.map((project) => (
               <ProjectCard
                 key={project.id}

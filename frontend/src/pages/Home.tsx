@@ -25,10 +25,10 @@ const Home = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative flex flex-col md:flex-row items-center justify-center gap-12 max-w-5xl mx-auto"
+          className="relative flex flex-col md:flex-row items-center justify-center gap-8 sm:gap-10 md:gap-12 max-w-5xl mx-auto px-2"
         >
           {/* Profile Image */}
-          <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 shrink-0 rounded-full overflow-hidden border-4 border-white dark:border-navy-800 shadow-xl dark:shadow-none">
+          <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 shrink-0 rounded-full overflow-hidden border-4 border-white dark:border-navy-800 shadow-xl dark:shadow-none">
             <img
               src="/profile-no-sunglasses.png"
               alt="Profile"
@@ -39,7 +39,7 @@ const Home = () => {
           <div className="text-center md:text-left">
 
             {/* Name */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight transition-colors duration-200">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4 tracking-tight transition-colors duration-200">
               Hi, I'm{' '}
               <TextDecrypt
                 text="Rafael Ramos"
@@ -48,23 +48,23 @@ const Home = () => {
             </h1>
 
             {/* Title */}
-            <p className="text-xl sm:text-2xl text-slate-600 dark:text-slate-400 mb-6 font-light transition-colors duration-200">
+            <p className="text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-400 mb-4 sm:mb-6 font-light transition-colors duration-200">
               Full-Stack Developer
             </p>
 
             {/* Bio */}
-            <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg leading-relaxed max-w-xl mx-auto md:mx-0 mb-10 transition-colors duration-200">
+            <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed max-w-xl mx-auto md:mx-0 mb-8 sm:mb-10 transition-colors duration-200">
               I build clean, responsive web applications with modern technologies.
               Passionate about creating great user experiences and writing maintainable code.
               I leverage AI tools to accelerate development, while carefully reviewing and refining the code to ensure high quality.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center md:justify-start gap-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center md:justify-start gap-3">
               <Link
                 id="view-projects-btn"
                 to="/projects"
-                className="w-full sm:w-auto px-8 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-0.5 text-center"
+                className="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-violet-500/25 hover:-translate-y-0.5 text-center text-sm sm:text-base"
               >
                 View My Projects
               </Link>
@@ -72,14 +72,14 @@ const Home = () => {
                 id="download-resume-btn"
                 href="/Rafael%20Ramos.pdf"
                 download="Rafael_Ramos_Resume.pdf"
-                className="w-full sm:w-auto px-8 py-3.5 bg-white dark:bg-navy-800 hover:bg-slate-50 dark:hover:bg-navy-700 text-slate-900 dark:text-white font-semibold rounded-xl border border-slate-200 dark:border-navy-700 hover:border-violet-500/50 transition-all duration-200 text-center"
+                className="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-3.5 bg-white dark:bg-navy-800 hover:bg-slate-50 dark:hover:bg-navy-700 text-slate-900 dark:text-white font-semibold rounded-xl border border-slate-200 dark:border-navy-700 hover:border-violet-500/50 transition-all duration-200 text-center text-sm sm:text-base"
               >
                 Download CV
               </a>
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center justify-center md:justify-start gap-6 mt-12">
+            <div className="flex items-center justify-center md:justify-start gap-5 mt-8 sm:mt-12">
               <a
                 href="https://github.com/Grraffic"
                 target="_blank"
@@ -114,7 +114,7 @@ const Home = () => {
       <Experience />
 
       {/* Featured Projects Section */}
-      <section className="py-24 px-4 bg-slate-50 dark:bg-navy-900 transition-colors duration-200">
+      <section className="py-14 sm:py-20 lg:py-24 px-4 bg-slate-50 dark:bg-navy-900 transition-colors duration-200">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -124,7 +124,7 @@ const Home = () => {
             className="flex flex-col items-center text-center mb-16"
           >
             <p className="text-violet-600 dark:text-violet-400 text-sm font-semibold uppercase tracking-widest mb-4">Portfolio</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-6">Featured Projects</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6">Featured Projects</h2>
             <p className="text-slate-600 dark:text-slate-400 max-w-2xl">
               A quick look at some of my recent work. View all projects to see my full portfolio.
             </p>
@@ -164,7 +164,7 @@ const Home = () => {
       </section>
 
       {/* Let's Work Together Section */}
-      <section className="py-32 px-4 bg-slate-900 dark:bg-[#0a0f1c] text-center transition-colors duration-200">
+      <section className="py-20 sm:py-24 md:py-32 px-4 bg-slate-900 dark:bg-[#0a0f1c] text-center transition-colors duration-200">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -172,10 +172,10 @@ const Home = () => {
           transition={{ duration: 0.7 }}
           className="max-w-3xl mx-auto"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-8">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 sm:mb-8">
             Let's work together
           </h2>
-          <p className="text-slate-400 text-lg mb-12 max-w-xl mx-auto">
+          <p className="text-slate-400 text-base sm:text-lg mb-8 sm:mb-12 max-w-xl mx-auto px-2">
             I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
           </p>
           <a

@@ -70,9 +70,9 @@ const Experience = () => {
   const [hoveredSkill, setHoveredSkill] = useState<Skill | null>(null);
 
   return (
-    <section className="py-24 px-4 bg-slate-100 dark:bg-[#0d1424] transition-colors duration-200">
+    <section className="py-14 sm:py-20 lg:py-24 px-4 bg-slate-100 dark:bg-[#0d1424] transition-colors duration-200">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col gap-24 items-center md:items-start w-full">
+        <div className="flex flex-col gap-16 sm:gap-20 lg:gap-24 items-center md:items-start w-full">
 
           {/* Top: Experiences */}
           <motion.div
@@ -83,15 +83,15 @@ const Experience = () => {
             className="w-full"
           >
             <p className="text-teal-600 dark:text-teal-400 text-sm font-semibold uppercase tracking-widest mb-4">Experience</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 sm:mb-8">
               My Journey
             </h2>
 
             <div className="relative border-l-2 border-slate-300 dark:border-slate-700/50 pl-6 ml-3">
               <div className="absolute w-3 h-3 bg-teal-500 dark:bg-teal-400 rounded-full -left-[7px] top-1.5 shadow-[0_0_10px_rgba(45,212,191,0.5)]"></div>
               <div className="mb-2 text-sm text-teal-600 dark:text-teal-400 font-semibold tracking-wide">Feb 2026 — May 2026</div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">IT Support Intern</h3>
-              <p className="text-slate-700 dark:text-slate-300 font-medium mb-3">LIPAD Corporation (Clark International Airport)</p>
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-1">IT Support Intern</h3>
+              <p className="text-slate-700 dark:text-slate-300 font-medium mb-3 text-sm sm:text-base">LIPAD Corporation (Clark International Airport)</p>
               <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
                 Provided comprehensive technical support including hardware and software installation, driver configuration, and basic troubleshooting to maintain seamless airport operations.
               </p>
@@ -107,11 +107,11 @@ const Experience = () => {
             className="flex flex-col w-full"
           >
             <p className="text-teal-600 dark:text-teal-400 text-sm font-semibold uppercase tracking-widest mb-4">Technologies</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 sm:mb-8">
               Tools I Use
             </h2>
 
-            <div className="relative flex flex-wrap gap-4 w-full">
+            <div className="relative flex flex-wrap gap-2 sm:gap-3 md:gap-4 w-full">
 
               {/* Ghost watermark icon — centered behind all cards on hover */}
               {hoveredSkill && (
@@ -129,14 +129,14 @@ const Experience = () => {
                   onMouseEnter={() => setHoveredSkill(skill)}
                   onMouseLeave={() => setHoveredSkill(null)}
                   style={{ ['--glow' as string]: skill.glowColor } as React.CSSProperties}
-                  className="relative z-10 group flex flex-col items-center justify-center gap-3 w-24 h-24 sm:w-28 sm:h-28 rounded-2xl cursor-default
+                  className="relative z-10 group flex flex-col items-center justify-center gap-2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-2xl cursor-default
                     bg-white dark:bg-white/5 backdrop-blur-sm border border-slate-200 dark:border-white/10
                     shadow-sm dark:shadow-none
                     transition-all duration-300 ease-out
                     hover:scale-105 hover:border-slate-300 dark:hover:border-white/25 hover:bg-slate-50 dark:hover:bg-white/10
                     hover:[box-shadow:0_0_22px_4px_var(--glow)]"
                 >
-                  <skill.Icon className={`text-3xl transition-transform duration-300 group-hover:scale-110 ${skill.iconColor}`} />
+                  <skill.Icon className={`text-2xl sm:text-3xl transition-transform duration-300 group-hover:scale-110 ${skill.iconColor}`} />
                   <span className="text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white text-xs font-medium text-center leading-tight transition-colors duration-300">{skill.name}</span>
                 </div>
               ))}

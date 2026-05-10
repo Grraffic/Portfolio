@@ -53,7 +53,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
           </button>
 
           {/* Image Header */}
-          <div className="relative h-64 sm:h-80 w-full bg-slate-100 dark:bg-navy-800 shrink-0">
+          <div className="relative h-44 sm:h-64 md:h-80 w-full bg-slate-100 dark:bg-navy-800 shrink-0">
             {project.image_url ? (
               <img 
                 src={project.image_url} 
@@ -71,8 +71,8 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
           </div>
 
           {/* Content */}
-          <div className="p-6 sm:p-8 overflow-y-auto">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-4">
+          <div className="p-4 sm:p-6 md:p-8 overflow-y-auto">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
               {project.title}
             </h2>
             
@@ -89,7 +89,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-slate-200 dark:border-navy-700">
+            <div className="flex flex-col sm:flex-row gap-3 pt-5 sm:pt-6 border-t border-slate-200 dark:border-navy-700">
               {project.live_url && (
                 <a 
                   href={project.live_url}

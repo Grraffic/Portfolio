@@ -30,13 +30,13 @@ const Admin = () => {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 dark:bg-navy-900 pt-24 pb-20 transition-colors duration-200">
+    <main className="min-h-screen bg-slate-50 dark:bg-navy-900 pt-20 sm:pt-24 pb-16 sm:pb-20 transition-colors duration-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10 animate-fade-in">
           <div>
             <p className="text-violet-600 dark:text-violet-400 text-sm font-semibold uppercase tracking-widest mb-1 transition-colors duration-200">Dashboard</p>
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white transition-colors duration-200">Manage Projects</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white transition-colors duration-200">Manage Projects</h1>
             <p className="text-slate-600 dark:text-slate-400 text-sm mt-1 transition-colors duration-200">
               {projects.length} project{projects.length !== 1 ? 's' : ''} total
             </p>
@@ -91,7 +91,7 @@ const Admin = () => {
 
         {/* Grid */}
         {!loading && projects.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {projects.map((project) => (
               <ProjectCard
                 key={project.id}
