@@ -7,11 +7,18 @@ import ProjectModal from '../components/ProjectModal';
 import TextDecrypt from '../components/TextDecrypt';
 import type { Project } from '../types/project';
 import Experience from '../components/Experience';
+import { useStats } from '../hooks/useStats';
+import { useEffect } from 'react';
 
 const Home = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const { projects, loading } = useProjects();
+  const { incrementViews } = useStats();
   const featuredProjects = projects.slice(0, 3);
+
+  useEffect(() => {
+    incrementViews();
+  }, []);
 
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-navy-900 transition-colors duration-200 overflow-x-hidden">

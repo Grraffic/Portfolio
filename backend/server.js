@@ -3,6 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const projectRoutes = require('./routes/projectRoutes');
+const statsRoutes = require('./routes/statsRoutes');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
@@ -23,6 +24,7 @@ app.get('/health', (req, res) => {
 
 // Routes
 app.use('/api/projects', projectRoutes);
+app.use('/api/stats', statsRoutes);
 
 // Error handler (must be last)
 app.use(errorHandler);

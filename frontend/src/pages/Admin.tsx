@@ -4,9 +4,11 @@ import useProjectModal from '../hooks/useProjectModal';
 import useToast from '../hooks/useToast';
 import ProjectCard from '../components/ProjectCard';
 import ProjectFormModal from '../components/ProjectFormModal';
+import { useStats } from '../hooks/useStats';
 
 const Admin = () => {
   const { projects, loading, error, createProject, updateProject, deleteProject } = useProjects();
+  const { stats, loading: statsLoading } = useStats();
   const modal = useProjectModal();
   const { toast, showToast } = useToast();
 
@@ -51,6 +53,38 @@ const Admin = () => {
             </svg>
             Add Project
           </button>
+        </div>
+
+        {/* Stats Row */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          <div className="bg-white dark:bg-navy-800 rounded-2xl p-6 border border-slate-200 dark:border-navy-700 shadow-sm transition-colors duration-200 flex items-center justify-between">
+            <div>
+              <p className="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Total Visits</p>
+              <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                {statsLoading ? '...' : stats?.count || 0}
+              </p>
+            </div>
+            <div className="w-12 h-12 rounded-xl bg-violet-100 dark:bg-violet-600/10 border border-violet-200 dark:border-violet-500/20 flex items-center justify-center">
+              <svg className="w-6 h-6 text-violet-600 dark:text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-navy-800 rounded-2xl p-6 border border-slate-200 dark:border-navy-700 shadow-sm transition-colors duration-200 flex items-center justify-between">
+            <div>
+              <p className="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Active Projects</p>
+              <p className="text-3xl font-bold text-slate-900 dark:text-white">
+                {projects.length}
+              </p>
+            </div>
+            <div className="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-600/10 border border-emerald-200 dark:border-emerald-500/20 flex items-center justify-center">
+              <svg className="w-6 h-6 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+          </div>
         </div>
 
         {/* Error */}
