@@ -106,8 +106,8 @@ const Experience = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col w-full"
           >
-            <p className="text-teal-600 dark:text-teal-400 text-sm font-semibold uppercase tracking-widest mb-4">Technologies</p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 sm:mb-8">
+            <p className="text-teal-600 dark:text-teal-400 text-sm font-semibold uppercase tracking-widest mb-4 text-center md:text-left">Technologies</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 sm:mb-8 text-center md:text-left">
               Tools I Use
             </h2>
 
@@ -117,7 +117,7 @@ const Experience = () => {
               {hoveredSkill && (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
                   <hoveredSkill.Icon
-                    className={`text-[30rem] opacity-10 transition-all duration-500 ${hoveredSkill.iconColor}`}
+                    className={`text-[15rem] sm:text-[30rem] opacity-10 transition-all duration-500 ${hoveredSkill.iconColor}`}
                     style={{ filter: `drop-shadow(0 0 60px ${hoveredSkill.glowColor})` }}
                   />
                 </div>

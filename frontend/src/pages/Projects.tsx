@@ -12,7 +12,7 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <main className="min-h-screen bg-slate-50 dark:bg-navy-900 pt-20 sm:pt-24 pb-16 sm:pb-20 transition-colors duration-200">
+    <main className="min-h-screen bg-slate-50 dark:bg-navy-900 pt-20 sm:pt-24 pb-16 sm:pb-20 transition-colors duration-200 overflow-x-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 animate-fade-in">

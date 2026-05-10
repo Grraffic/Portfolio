@@ -14,7 +14,7 @@ const Home = () => {
   const featuredProjects = projects.slice(0, 3);
 
   return (
-    <main className="min-h-screen bg-slate-50 dark:bg-navy-900 transition-colors duration-200">
+    <main className="min-h-screen bg-slate-50 dark:bg-navy-900 transition-colors duration-200 overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
         {/* Animated background orbs */}
