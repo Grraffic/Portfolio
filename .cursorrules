@@ -1,0 +1,95 @@
+# Portfolio Project — Cursor Rules
+# These rules are loaded automatically on every prompt.
+
+## Project Overview
+Personal developer portfolio for **Rafael Ramos** — full-stack app for showcasing projects with tech stacks.
+- GitHub: https://github.com/Grraffic
+
+## ⚠️ SURGICAL CHANGE RULE (ALWAYS ENFORCED)
+When making ANY code change:
+1. **Touch ONLY the files and lines required** to fulfil the request.
+2. Do NOT reformat, rename, restructure, or "clean up" unrelated code.
+3. Do NOT add or remove imports that are not needed for the specific change.
+4. Do NOT alter component logic, styling, or props that are not part of the request.
+5. After every edit, verify that unrelated files are unchanged.
+If a change in one file could break another, fix ONLY the broken reference — nothing else.
+
+## Tech Stack
+- **Frontend**: React 19 + TypeScript + Vite + Tailwind CSS v3
+- **Backend**: Node.js + Express (CommonJS)
+- **Database**: Supabase (PostgreSQL)
+
+---
+
+## Folder Structure Rules
+
+### Frontend (`frontend/src/`)
+```
+components/   → Reusable UI only — NO business logic, NO API calls
+hooks/        → All stateful logic lives here (data fetching, modals, toasts)
+pages/        → Thin wrappers — import hooks + components, minimal JSX logic
+services/     → All HTTP/API calls (axios) — one file per resource
+types/        → TypeScript interfaces only
+```
+
+### Backend (`backend/`)
+```
+controllers/  → Business logic only — one function per endpoint
+routes/       → Map HTTP verbs to controller functions — no logic here
+config/       → External clients (Supabase) — one file per service
+middleware/   → Cross-cutting concerns (error handling, auth)
+server.js     → Entry point — setup only, no route logic
+```
+
+---
+
+## Code Rules
+
+### Separation of Concerns (STRICT)
+- Pages MUST NOT contain `useState` for data fetching, API calls, or business logic
+- All data logic → extract to a `hooks/use[Feature].ts` file
+- Components MUST NOT import `projectService` directly
+- Services MUST NOT contain UI state
+
+### Naming Conventions
+- Hooks: `use` prefix, camelCase — e.g. `useProjects`, `useToast`, `useProjectModal`
+- Components: PascalCase — e.g. `ProjectCard`, `TechBadge`
+- Services: camelCase, `Service` suffix — e.g. `projectService`
+- Types/Interfaces: PascalCase — e.g. `Project`, `ProjectFormData`
+- Files: match the export name — e.g. `ProjectCard.tsx`, `useProjects.ts`
+
+### TypeScript Rules
+- Always use `import type { ... }` for type-only imports (verbatimModuleSyntax is enabled)
+- Never use `any` — define types in `types/`
+- Keep interfaces in `types/project.ts`, not inline
+
+### Tailwind CSS Rules
+- All styling via Tailwind utility classes — no inline `style={}` unless truly dynamic
+- Colors: use `navy-*` and `violet-*` from tailwind.config.js — no hardcoded hex
+- Animations: use `animate-fade-in` and `animate-slide-up` from tailwind.config.js
+- No `@apply` in component files — only in `index.css` base layer
+
+### Component Rules
+- Props interface defined directly above the component
+- Always add unique `id` attributes to interactive elements (buttons, inputs) for testability
+- Use `line-clamp-3` utility for truncated text
+
+### Backend Rules
+- Controller functions: always `async (req, res, next)` signature
+- Always call `next(error)` on catch — never `res.status(500)` directly in controllers
+- Always validate required fields before Supabase calls
+- Use `@supabase/supabase-js` only via `config/supabase.js` — never initialize inline
+
+---
+
+## File You Are Likely Editing
+When working in this project, always check:
+1. `hooks/` first — does a hook already handle this logic?
+2. `services/projectService.ts` — does the API method already exist?
+3. `types/project.ts` — is the type already defined?
+
+## Do NOT
+- Put fetch logic directly in a page component
+- Create new CSS files — use Tailwind
+- Use `require()` in the frontend — use ES module `import`
+- Use `import` in the backend — use CommonJS `require()`
